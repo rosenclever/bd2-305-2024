@@ -84,3 +84,16 @@ create table funcionarios(
     nome varchar(150) not null
 );
 
+create table vendas(
+    numero int not null auto_increment,
+    constraint vendas_pk primary key(numero),
+    data datetime not null,
+    cliente int not null,
+    funcionario int,
+    constraint vendas_clientes_fk
+        foreign key(cliente)
+        references clientes(id),
+    constraint vendas_funcionarios_fk
+        foreign key(funcionario)
+        references funcionarios(id)
+);
