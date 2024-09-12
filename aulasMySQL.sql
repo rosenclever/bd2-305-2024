@@ -76,3 +76,11 @@ alter table produtos
 add constraint categorias_produtos_fk
     foreign key(categoria)
     references categorias(id);
+
+create table funcionarios(
+    id int not null,
+    constraint funcionarios_pk primary key(id),
+    matricula int not null,
+    nome varchar(150) not null
+);
+
