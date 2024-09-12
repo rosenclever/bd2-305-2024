@@ -97,3 +97,18 @@ create table vendas(
         foreign key(funcionario)
         references funcionarios(id)
 );
+
+create table itensvendidos(
+    produto int not null,
+    venda int not null,
+    quantidade int not null,
+    valor decimal(18,2) not null,
+    constraint itensvendidos_pk
+        primary key(produto, venda),
+    constraint produtos_itensvendidos_fk
+        foreign key(produto)
+        references produtos(id),
+    constraint vendas_itensvendidos_fk
+        foreign key(venda)
+        references vendas(numero)
+);
