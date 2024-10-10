@@ -51,3 +51,35 @@ DELETE FROM SALAS WHERE capacidade = 17 AND id = 6;
 
 --ATUALIZAR DADOS 
 UPDATE SALAS SET capacidade = 10;
+
+-- insira 3 alunos no sistema, sendo cada aluno de uma turma diferente e com um método de inserção diferente entre si
+insert into alunos values(1, 'Fulano de Tal', '105');
+insert into alunos(nome, turma) values('Fulana de Tal', '205');
+insert into alunos(turma, nome) values('305', 'Veterano Fera');
+
+-- liste o nome de todos os alunos da turma 305
+select nome
+from alunos
+where turma = '305';
+
+-- liste o nome e a turma correspondente aos alunos cuja turma termine com o número 5
+select nome, turma
+from alunos
+where turma like '%5';
+
+-- modifique o nome do aluno da turma 305 para seu nome
+update alunos 
+set nome = 'Seu nome'
+where turma = '305';
+
+-- exclua todos os alunos cujo nome inicie com a letra F
+delete from alunos
+where nome like 'F%';
+
+-- modifique a tabela aluno para que possua a coluna email, sendo que não será permitido o cadastro de emails iguais para diferentes alunos
+
+-- nodifique o email do aluno SeuNome para seunome@seuemail.com
+
+-- adicione 3 novos alunos na tabela alunos e pertencentes a turma do aluno SeuNome e um outro pertence a uma turma diferente
+
+
