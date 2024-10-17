@@ -52,7 +52,7 @@ DELETE FROM SALAS WHERE capacidade = 17 AND id = 6;
 --ATUALIZAR DADOS 
 UPDATE SALAS SET capacidade = 10;
 
--- insira 3 alunos no sistema, sendo cada aluno de uma turma diferente e com um método de inserção diferente entre si
+-- insira 3 alunos no sistema, sendo cada aluno de uma turma diferente e com um mï¿½todo de inserï¿½ï¿½o diferente entre si
 insert into alunos values(1, 'Fulano de Tal', '105');
 insert into alunos(nome, turma) values('Fulana de Tal', '205');
 insert into alunos(turma, nome) values('305', 'Veterano Fera');
@@ -62,7 +62,7 @@ select nome
 from alunos
 where turma = '305';
 
--- liste o nome e a turma correspondente aos alunos cuja turma termine com o número 5
+-- liste o nome e a turma correspondente aos alunos cuja turma termine com o nï¿½mero 5
 select nome, turma
 from alunos
 where turma like '%5';
@@ -76,10 +76,50 @@ where turma = '305';
 delete from alunos
 where nome like 'F%';
 
--- modifique a tabela aluno para que possua a coluna email, sendo que não será permitido o cadastro de emails iguais para diferentes alunos
-
--- nodifique o email do aluno SeuNome para seunome@seuemail.com
-
+-- modifique a tabela aluno para que possua a coluna email, sendo que nï¿½o serï¿½ permitido o cadastro de emails iguais para diferentes alunos
+ALTER TABLE Alunos
+ADD EMAIL VARCHAR(50);
+ALTER TABLE Alunos
+ADD CONSTRAINT ALUNO_UQ UNIQUE(EMAIL);
+-- Modifique o email do aluno SeuNome para seunome@seuemail.com
+update alunos
+set email = 'senome@seuemail.com'
+where nome = 'seunome';
 -- adicione 3 novos alunos na tabela alunos e pertencentes a turma do aluno SeuNome e um outro pertence a uma turma diferente
+insert into alunos(nome, turma, email)
+values('JoÃ£o', '305', 'joÃ£o@mail.com'),
+('cineli', '205', 'cinele@gmail.com'),
+('cleiton', '305', 'cleiton@gmail.com');
 
+-- liste o total de alunos cadastrados
+select count(*) as "total de alunos"
+from alunos;
 
+-- informe o total de alunos por tura
+select turma, count(*) as "total de alunos"
+from alunos;
+
+select turma, count(*) as "total de alunos"
+from alunos
+group by turma;
+
+--adicione os seguintes alunos
+insert into alunos(nome, turma, email)
+values('peter', '301', 'aranha@mail.com'),
+('lais', '301', 'croft@mail.com'),
+('louis', '205', 'lane@mail.com'),
+('clark', '305', 'kent@mail.com'),
+('tanus', '201', 'dedo@mail.com');
+
+-- liste as turmas e seu quantitativo de alunos. Apresente apenas as turmas que possuem mais de 1 aluno cadastrado
+select turma, count(*)
+from alunos
+group by turma
+having count(*) > 1;
+
+-- Liste o total de alunos por turma. Considere aprenas as turmas de terceiro ano e que possuem mais de um aluno cadastrado.
+select turma, count(*)
+from alunos
+where turma like '3%'
+group by turma
+having count(*) > 1;
